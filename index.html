@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ivana Jelic S9/18 DZ67</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 2px solid blue;
+          text-align: left;
+          padding: 10px;
+        }
+        
+        tr:nth-child(even) {
+          background-color:  lightskyblue;
+        }
+
+		tr:nth-child(odd) {
+          background: royalblue;
+        }
+        </style>
+</head>
+<body>
+	<h2>Ivana Jelic S9/18</h2>
+	<input type="text" id="pretraga" placeholder="Pretraga">
+		<table border="2">
+
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Predmet</th>
+				<th>Tip</th>
+				<th>Nastavnik</th>
+				<th>Grupe</th>
+				<th>Dan</th>
+				<th>Termin</th>
+				<th>Vreme</th>
+			  </tr>
+		</thead>
+			
+		<tbody id="pretraga">
+			{% for s in raspored %}
+			<tr>
+				<td>{{s[0]}}</td>
+				<td>{{s[1]}}</td>
+				<td>{{s[2]}}</td>
+				<td>{{s[3]}}</td>
+				<td>{{s[4]}}</td>
+				<td>{{s[5]}}</td>
+				<td>{{s[6]}}</td>  
+				<td>{{s[7]}}</td>         
+				
+			</tr>
+		{% endfor %}
+		</tbody>
+	
+		  </table>
+
+
+		  <table style="display: inline-block;">
+			  <thead>
+				  <tr>
+					  <td>Jedinstevni naziv profesora</td>
+				  </tr>
+			  </thead>
+			  <tbody>
+				{% for s in profesori %}
+				  <tr>
+					  <td><a href="#" class="profesori ime">{{s[0]}}</a></td>
+				  </tr>
+				  {% endfor %}
+			  </tbody>
+		  </table>
+
+		  <table style="float: left; margin-right: 30px; display: inline-block;" >
+			<thead>
+				<tr>
+					<td>Jedinstveni naziv ucionica</td>
+				</tr>
+			</thead>
+			<tbody>
+			  {% for s in ucionica %}
+				<tr>
+					<td><a href="#" class="ucionica broj">{{s[0]}}</a></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		  <script>
+			  $(document).ready(function(){
+				  $("#pretraga").on("keyup", function(){
+					  var value = $(this).val().toLowerCase();
+					  $("#pretraga tr").filter(function(){
+						  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					  });
+				  });
+			  });
+		  </script>
+
+		<script>
+			$(".profesori").click(function(){
+				var ime = $(this).html();
+				$("#pretraga").val(ime);
+					var value = $("#pretraga").val().toLowerCase();
+					$("#pretraga tr").filter(function(){
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+			
+		</script>
+
+<script>
+	$(".ucionica").click(function(){
+		var broj = $(this).html();
+		$("#pretraga").val(broj);
+			var value = $("#pretraga").val().toLowerCase();
+			$("#pretraga tr").filter(function(){
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	
+</script>
+</body>
+</html>
